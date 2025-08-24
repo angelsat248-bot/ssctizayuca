@@ -2,14 +2,17 @@ services:
   - type: web
     name: ssctizayuca
     env: node
+    root: backend  # Indica que la aplicación está en la carpeta backend
     buildCommand: npm install
-    startCommand: npm start
+    startCommand: node server.js
     envVars:
       - key: NODE_ENV
         value: production
       - key: PORT
         value: 10000
-      - key: DB_HOST
+      - key: NPM_CONFIG_PRODUCTION
+        value: "false"  # Asegura que se instalen dependencias de desarrollo
+      - key: DATABASE_URL
         fromDatabase:
           name: ssctizayuca-db
           property: connectionString
@@ -17,6 +20,6 @@ services:
 
 databases:
   - name: ssctizayuca-db
-    databaseName: ssctizayuca
-    user: ssctizayuca_user
+    databaseName: lalo  # Nombre de tu base de datos
+    user: postgres      # Usuario de la base de datos
     plan: free

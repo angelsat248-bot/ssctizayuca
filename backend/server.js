@@ -187,7 +187,31 @@ app.use((err, req, res, next) => {
     res.status(500).json({ success: false, message: 'Error en el servidor' });
 });
 
+// Configuración del puerto
 const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-    console.log(`Servidor corriendo en http://localhost:${PORT}`);
+const HOST = process.env.NODE_ENV === 'production' ? '0.0.0.0' : 'localhost';
+
+// Iniciar el servidor
+const server = app.listen(PORT, HOST, () => {
+    console.log(`✅ Servidor corriendo en http://${HOST}:${PORT}`);
+    console.log(`🔄 Modo: ${process.env.NODE_ENV || 'development'}`);
+});
+
+// Manejo de errores de inicio del servidor
+server.on('error', (error) => {
+    if (error.code === 'EADDRINUSE') {
+        console.error(`❌ El puerto ${PORT} ya está en uso.`);
+    } else {
+        console.error('❌ Error al iniciar el servidor:', error);
+    }
+    process.exit(1);
+});
+
+// Manejo de cierre de la aplicación
+process.on('SIGTERM', () => {
+    console.log('🛑 Recibida señal de terminación. Cerrando el servidor...');
+    server.close(() => {
+        console.log('👋 Servidor cerrado');
+        process.exit(0);
+    });
 });
