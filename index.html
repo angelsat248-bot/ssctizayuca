@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema de Gestión Policial - SSCTIZAYUCA</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <div class="dashboard">
+        <header class="header">
+            <div class="logo">
+                <img src="img/logo1.jpg" alt="Escudo Policial" class="logo-img">
+                <h1>SSCTIZAYUCA</h1>
+            </div>
+            <nav class="user-menu">
+                <span class="welcome">Bienvenido, Administrador</span>
+                <button class="logout-btn"><i class="fas fa-sign-out-alt"></i> Cerrar Sesión</button>
+            </nav>
+        </header>
+        
+        <div class="container">
+            <aside class="sidebar">
+                <nav class="main-nav">
+                    <ul>
+                        <li class="active" data-tab="datos-generales"><i class="fas fa-user"></i> Datos Generales</li>
+                        <li data-tab="evaluaciones-control"><i class="fas fa-clipboard-check"></i> Evaluaciones de Control</li>
+                        <li data-tab="formacion-inicial"><i class="fas fa-graduation-cap"></i> Formación Inicial</li>
+                        <li data-tab="competencias-basicas"><i class="fas fa-tasks"></i> Competencias Básicas</li>
+                        <li data-tab="evaluacion-desempeno"><i class="fas fa-chart-line"></i> Evaluación de Desempeño</li>
+                        <li data-tab="reportes"><i class="fas fa-file-alt"></i> Reportes</li>
+                        <li data-tab="perfil-policia"><i class="fas fa-id-card"></i> Perfil</li>
+                    </ul>
+                </nav>
+            </aside>
+            
+            <main class="main-content">
+                <div id="datos-generales" class="tab-content active">
+                    <h2><i class="fas fa-user"></i> Integración de expediente</h2>
+                    
+                    <!-- Search Form -->
+                    <div class="search-container">
+                        <h3><i class="fas fa-search"></i> Buscar Personal</h3>
+                        <form id="search-form" class="search-form">
+                            <div class="search-input-group">
+                                <input type="text" id="search-query" placeholder="Buscar por nombre o CURP..." required>
+                                <button type="submit" class="btn btn-primary">
+                                    <i class="fas fa-search"></i> Buscar
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                    
+                    <!-- Search Results -->
+                    <div id="search-results" class="search-results" style="display: none;">
+                        <h3>Resultados de la búsqueda</h3>
+                        <div class="table-responsive">
+                            <table class="results-table">
+                                <thead>
+                                    <tr>
+                                        <th>Foto</th>
+                                        <th>Nombre</th>
+                                        <th>Apellidos</th>
+                                        <th>Grado/Cargo</th>
+                                        <th>CURP</th>
+                                        <th>Teléfono</th>
+                                        <th>Acciones</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="results-body">
+                                    <!-- Results will be inserted here by JavaScript -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    
+                    <!-- Personal Data Form -->
+                    <form id="form-datos-generales" class="form-container">
+                        <div class="form-group">
+                            <div class="form-column">
+                                <div class="form-row">
+                                    <div class="form-field">
+                                        <label for="apellidoPaterno">Apellido Paterno *</label>
+                                        <input type="text" id="apellidoPaterno" name="apellidoPaterno" required>
+                                    </div>
+                                    <div class="form-field">
+                                        <label for="apellidoMaterno">Apellido Materno *</label>
+                                        <input type="text" id="apellidoMaterno" name="apellidoMaterno" required>
+                                    </div>
+                                </div>
+                                
+                                <div class="form-row">
+                                    <div class="form-field">
+                                        <label for="nombres">Nombre(s) *</label>
+                                        <input type="text" id="nombres" name="nombres" required>
+                                    </div>
+                                    <div class="form-field">
+                                        <label for="fechaNacimiento">Fecha de Nacimiento *</label>
+                                        <input type="date" id="fechaNacimiento" name="fechaNacimiento" required>
+                                    </div>
+                                </div>
+                                
+                                <div class="form-row">
+                                    <div class="form-field">
+                                        <label for="fechaIngreso">Fecha de Ingreso *</label>
+                                        <input type="date" id="fechaIngreso" name="fechaIngreso" required>
+                                    </div>
+                                    <div class="form-field">
+                                        <label for="gradoCargo">Grado o Cargo *</label>
+                                        <select id="gradoCargo" name="gradoCargo" required>
+                                            <option value="">Seleccione...</option>
+                                            <option value="Comandante">Comandante</option>
+                                            <option value="Oficial">Oficial</option>
+                                            <option value="Agente">Agente</option>
+                                            <option value="Oficial Primero">Oficial Primero</option>
+                                            <option value="Suboficial">Suboficial</option>
+                                            <option value="Oficial Técnico">Oficial Técnico</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                
+                                <div class="form-row">
+                                    <div class="form-field">
+                                        <label>Sexo *</label>
+                                        <div class="radio-group">
+                                            <label><input type="radio" name="sexo" value="Masculino" required> Masculino</label>
+                                            <label><input type="radio" name="sexo" value="Femenino"> Femenino</label>
+                                            <label><input type="radio" name="sexo" value="Otro"> Otro</label>
+                                        </div>
+                                    </div>
+                                    <div class="form-field">
+                                        <label for="curp">CURP *</label>
+                                        <input type="text" id="curp" name="curp" required pattern="^[A-Z]{4}[0-9]{6}[HM][A-Z]{5}[0-9A-Z]{2}$" title="Ingrese un CURP válido">
+                                    </div>
+                                </div>
+                                
+                                <div class="form-row">
+                                    <div class="form-field">
+                                        <label for="escolaridad">Escolaridad *</label>
+                                        <select id="escolaridad" name="escolaridad" required>
+                                            <option value="">Seleccione...</option>
+                                            <option value="Primaria">Primaria</option>
+                                            <option value="Secundaria">Secundaria</option>
+                                            <option value="Preparatoria">Preparatoria/Bachillerato</option>
+                                            <option value="Técnico">Técnico</option>
+                                            <option value="Licenciatura">Licenciatura</option>
+                                            <option value="Maestría">Maestría</option>
+                                            <option value="Doctorado">Doctorado</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-field">
+                                        <label for="telefono">Teléfono de Contacto *</label>
+                                        <input type="tel" id="telefono" name="telefono" required pattern="[0-9]{10}" title="Ingrese un número de 10 dígitos">
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="photo-upload">
+                                <div class="photo-preview">
+                                    <img id="fotoPreview" src="img/logo1.jpg" alt="Foto de perfil">
+                                </div>
+                                <div class="upload-btn-wrapper">
+                                    <button type="button" class="btn-upload">Seleccionar Foto</button>
+                                    <input type="file" id="foto" name="foto" accept="image/*" capture="camera">
+                                    <span class="file-name" id="fileName">No se ha seleccionado ninguna imagen</span>
+                                </div>
+                                <p class="hint">Selecciona imagen de perfil para documentacion</p>
+                            </div>
+                        </div>
+                        
+                        <div class="form-actions">
+                            <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Guardar</button>
+                            <button type="button" class="btn btn-secondary"><i class="fas fa-undo"></i> Limpiar</button>
+                        </div>
+                    </form>
+                </div>
+                
+                <div id="evaluaciones-control" class="tab-content">
+                    <h2><i class="fas fa-clipboard-check"></i> Evaluaciones de Control</h2>
+                    
+                    <!-- Search Form -->
+                    <div class="search-container">
+                        <form id="evaluacion-search-form" class="search-form">
+                            <div class="search-input-group">
+                                <input type="text" id="evaluacion-search-query" placeholder="Buscar por nombre o apellidos..." required>
+                                <button type="submit" class="btn btn-primary">
+                                    <i class="fas fa-search"></i> Buscar
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+
+                    <!-- Search Results -->
+                    <div id="evaluacion-search-results" class="search-results" style="display: none;">
+                        <h3>Resultados de la búsqueda</h3>
+                        <div class="table-responsive">
+                            <table class="results-table">
+                                <thead>
+                                    <tr>
+                                        <th>Foto</th>
+                                        <th>Nombres</th>
+                                        <th>Apellidos</th>
+                                        <th>Grado/Cargo</th>
+                                        <th>Acciones</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="evaluacion-results-body">
+                                    <!-- Los resultados se cargarán aquí dinámicamente -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- Evaluation Form (initially hidden) -->
+                    <div id="evaluacion-form-container" style="display: none;">
+                        <div class="form-section">
+                            <h3>Datos del Policia</h3>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="personal-nombre">Nombre completo:</label>
+                                    <input type="text" id="personal-nombre" class="form-control" readonly>
+                                </div>
+                                <div class="form-group">
+                                    <label for="personal-grado">Grado/Cargo:</label>
+                                    <input type="text" id="personal-grado" class="form-control" readonly>
+                                </div>
+                                <div class="form-group">
+                                    <label for="personal-cuip">CUIP:</label>
+                                    <input type="text" id="personal-cuip" class="form-control" maxlength="16" 
+                                           placeholder="Ej: 18MXHGO00012543" required>
+                                    <small class="form-text text-muted">Formato: AAMMPPPPNNNNNNNN (Año, Municipio, Número consecutivo)</small>
+                                    <div id="cuip-validation" class="validation-message"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-section">
+                            <h3>Datos de la Evaluación</h3>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="tipo-evaluacion">Tipo de Evaluación:</label>
+                                    <select id="tipo-evaluacion" class="form-control" disabled>
+                                        <option value="">Seleccione un tipo</option>
+                                        <option value="control_confianza">Control de Confianza</option>
+                                        <option value="evaluacion_psicologica">Evaluación Psicológica</option>
+                                        <option value="examen_medico">Examen Médico</option>
+                                        <option value="evaluacion_teorica">Evaluación Teórica</option>
+                                        <option value="evaluacion_practica">Evaluación Práctica</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="fecha-evaluacion">Fecha de Evaluación:</label>
+                                    <input type="date" id="fecha-evaluacion" class="form-control" disabled>
+                                </div>
+                                <div class="form-group">
+                                    <label for="resultado">Resultado:</label>
+                                    <select id="resultado" class="form-control" disabled>
+                                        <option value="">Seleccione un resultado</option>
+                                        <option value="aprobado">Aprobado</option>
+                                        <option value="reprobado">Reprobado</option>
+                                        <option value="pendiente">Pendiente</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="vigencia">Vigencia:</label>
+                                    <input type="date" id="vigencia" class="form-control" disabled>
+                                    <div id="vigencia-validation" class="validation-message"></div>
+                                </div>
+                                <div class="form-group file-upload">
+                                    <label for="archivo-pdf">Documento PDF:</label>
+                                    <div class="file-upload-wrapper">
+                                        <input type="file" id="archivo-pdf" class="form-control" accept=".pdf" disabled>
+                                        <label for="archivo-pdf" class="file-upload-label">
+                                            <i class="fas fa-file-pdf"></i> Seleccionar archivo
+                                        </label>
+                                        <span id="file-name" class="file-name">No se ha seleccionado ningún archivo</span>
+                                    </div>
+                                    <small class="form-text text-muted">Tamaño máximo: 5MB. Solo archivos PDF.</small>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-actions">
+                            <button type="button" id="btn-agregar" class="btn btn-primary" disabled>
+                                <i class="fas fa-plus"></i> Agregar Evaluación
+                            </button>
+                            <button type="button" id="btn-limpiar" class="btn btn-secondary">
+                                <i class="fas fa-undo"></i> Limpiar
+                            </button>
+                        </div>
+
+                        <!-- Lista de evaluaciones registradas -->
+                        <div id="evaluaciones-registradas" class="evaluaciones-lista">
+                            <h3>Evaluaciones Registradas</h3>
+                            <div class="table-responsive">
+                                <table class="results-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Tipo</th>
+                                            <th>Fecha Evaluación</th>
+                                            <th>Resultado</th>
+                                            <th>Vigencia</th>
+                                            <th>Documento</th>
+                                            <th>Acciones</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="evaluaciones-body">
+                                        <!-- Las evaluaciones se cargarán aquí dinámicamente -->
+                                        <tr>
+                                            <td colspan="6" class="no-records">No hay evaluaciones registradas</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div id="formacion-inicial" class="tab-content">
+                    <h2><i class="fas fa-graduation-cap"></i> Formación Inicial</h2>
+                    <p>Contenido de formación inicial. Próximamente...</p>
+                </div>
+
+                <!-- Perfil Section -->
+                <div id="perfil-policia" class="tab-content">
+                    <div class="iframe-container">
+                        <iframe src="perfil-policia.html" frameborder="0" style="width: 100%; height: 100%; min-height: 80vh;"></iframe>
+                    </div>
+                </div>
+                
+                <div id="competencias-basicas" class="tab-content">
+                    <!-- El contenido de competencias-basicas.html se cargará aquí -->
+                </div>
+                
+                <div id="evaluacion-desempeno" class="tab-content">
+                    <h2><i class="fas fa-chart-line"></i> Evaluación de Desempeño</h2>
+                    <p>Contenido de evaluación de desempeño. Próximamente...</p>
+                </div>
+                
+                <div id="reportes" class="tab-content">
+                    <h2><i class="fas fa-file-alt"></i> Reportes</h2>
+                    <p>Contenido de reportes. Próximamente...</p>
+                </div>
+            </main>
+        </div>
+    </div>
+    
+    <script type="module" src="js/main.js"></script>
+</body>
+</html>

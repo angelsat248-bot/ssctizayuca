@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reportes</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="css/reportes.css">
+    <!--<link rel="stylesheet" href="css/reportes-generales.css">-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="reports-container">
+        <div class="tabs">
+            <button class="tab-link active" data-tab="estatus-personal">Estatus de los Policias</button>
+            <button class="tab-link" data-tab="reportes-generales">Reportes</button>
+            <button class="tab-link" data-tab="estadisticas">Estadísticas</button>
+        </div>
+
+        <div id="estatus-personal" class="tab-content active">
+            <h2>Búsqueda de Policias</h2>
+            <div class="search-container">
+                <input type="text" id="search-input" placeholder="Buscar por Nombre o CURP...">
+                <button id="search-button"><i class="fas fa-search"></i> Buscar</button>
+            </div>
+            <div class="table-container">
+                <table id="results-table">
+                    <thead>
+                        <tr>
+                            <th>Nombre Completo</th>
+                            <th>CURP</th>
+                            <th>CUIP</th>
+                            <th>Estatus</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Los resultados de la búsqueda se insertarán aquí -->
+                    </tbody>
+                </table>
+            </div>
+            <div id="status-summary" class="status-summary-container"></div>
+        </div>
+
+        <div id="reportes-generales" class="tab-content">
+            <!-- Include the reports content -->
+            <div class="reportes-container">
+                <div class="search-section">
+                    <div class="search-container">
+                        <i class="fas fa-search search-icon"></i>
+                        <input type="text" id="search-personal" placeholder="Buscar por nombre o CURP..." class="search-input">
+                        <button id="search-btn" class="btn btn-primary">
+                            <i class="fas fa-search"></i> Buscar
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Search Results -->
+                <div id="search-results" class="search-results">
+                    <div class="table-responsive">
+                        <table id="results-table" class="results-table">
+                            <thead>
+                                <tr>
+                                    <th>Nombre</th>
+                                    <th>Apellido Paterno</th>
+                                    <th>Apellido Materno</th>
+                                    <th>Grado/Cargo</th>
+                                    <th>Fechas de Ingreso</th>
+                                    <th>CURP</th>
+                                    <th>Escolaridad</th>
+                                    <th>Teléfono</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody id="results-body">
+                                <!-- Results will be populated here -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Officer Details Modal -->
+                <div id="officer-modal" class="modal">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h3>Información Detallada del Policía</h3>
+                            <span class="close">&times;</span>
+                        </div>
+                        <div class="modal-body" id="officer-details">
+                            <!-- Officer details will be loaded here -->
+                        </div>
+                        <div class="modal-footer">
+                            <button id="print-pdf" class="btn btn-primary">
+                                <i class="fas fa-file-pdf"></i> Imprimir Datos del Policía
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="estadisticas" class="tab-content">
+            <h2>Estadísticas</h2>
+            <p>Contenido de estadísticas irá aquí.</p>
+        </div>
+    </div>
+
+    <!-- JavaScript Libraries -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.28/jspdf.plugin.autotable.min.js"></script>
+    
+    <!-- JavaScript Files -->
+    <script>
+        // Debug script loading
+        console.log('Cargando reportes-generales.js...');
+        window.addEventListener('error', function(e) {
+            console.error('Error en la página:', e.message, 'en', e.filename, 'línea', e.lineno);
+        });
+    </script>
+    <script src="js/reportes-generales.js"></script>
+    <script>
+        console.log('reportes-generales.js cargado correctamente');
+        // Mover el script de reportes.js después para evitar conflictos
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('Cargando reportes.js...');
+            const script = document.createElement('script');
+            script.src = 'js/reportes.js';
+            script.onload = function() {
+                console.log('reportes.js cargado correctamente');
+            };
+            script.onerror = function() {
+                console.error('Error al cargar reportes.js');
+            };
+            document.body.appendChild(script);
+        });
+    </script>
+</body>
+</html>

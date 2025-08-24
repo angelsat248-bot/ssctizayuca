@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Evaluación de Desempeño</title>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/evaluacion-desempeno.css">
+</head>
+<body>
+    <div class="form-container desempeno-container">
+        <div class="search-section">
+            <div class="search-container">
+                <i class="fas fa-search search-icon"></i>
+                <input type="text" id="search-personal-desempeno" placeholder="Buscar por nombre o CURP..." class="search-input">
+            </div>
+            <div id="search-results-desempeno" class="search-results"></div>
+        </div>
+
+        <div id="selected-personal-desempeno" class="selected-personal-card"></div>
+
+        <div class="tabs-container">
+            <div class="tabs-desempeno">
+                <button class="tab-link-desempeno active" data-tab="historial-laboral">
+                    <i class="fas fa-briefcase"></i>
+                    <span>Historial Laboralaaaaaaaa</span>
+                </button>
+                <button class="tab-link-desempeno" data-tab="incapacidades-ausencias">
+                    <i class="fas fa-procedures"></i>
+                    <span>Incapacidades y Ausenciassssss</span>
+                </button>
+                <button class="tab-link-desempeno" data-tab="estimulos-sanciones">
+                    <i class="fas fa-award"></i>
+                    <span>Estímulos y Sanciones</span>
+                </button>
+                <button class="tab-link-desempeno" data-tab="separacion-servicio">
+                    <i class="fas fa-sign-out-alt"></i>
+                    <span>Separación del Servicio</span>
+                </button>
+            </div>
+        </div>
+
+        <div id="forms-container-desempeno">
+            <!-- Historial Laboral -->
+            <form id="historial-laboral-form" class="tab-content-desempeno active" data-tab="historial-laboral">
+                <h3>Historial</h3>
+                <div class="form-group">
+                    <label for="cup">CUP (Clave Única Policial)</label>
+                    <input type="text" id="cup" name="cup" maxlength="16" required>
+                </div>
+                <div class="form-group">
+                    <label for="cup_vigencia">Vigencia del CUP</label>
+                    <input type="date" id="cup_vigencia" name="cup_vigencia" required>
+                </div>
+                <fieldset id="historial-laboral-fieldset">
+                    <div class="form-group">
+                        <label for="funcion">Función</label>
+                        <input type="text" id="funcion" name="funcion">
+                    </div>
+                    <div class="form-group">
+                        <label for="direccion">Dirección</label>
+                        <input type="text" id="direccion" name="direccion">
+                    </div>
+                    <div class="form-group">
+                        <label for="periodo">Periodo</label>
+                        <input type="text" id="periodo" name="periodo">
+                    </div>
+                    <div class="form-group">
+                        <label for="documento_comprobatorio">Documento Comprobatorio (PDF)</label>
+                        <div class="file-input-wrapper">
+                            <input type="file" id="documento_comprobatorio" name="documento_comprobatorio" accept=".pdf">
+                            <button type="button" class="file-input-btn">
+                                <i class="fas fa-upload"></i>
+                                <span>Seleccionar archivo</span>
+                            </button>
+                            <span class="file-name"></span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="checkbox-container">
+                            <input type="checkbox" name="portacion_armas_fuego">
+                            <span class="checkmark"></span>
+                            Portación de Armas de Fuego
+                        </label>
+                    </div>
+                    <button type="submit" class="btn btn-save">
+                        <i class="fas fa-save"></i>
+                        Guardar Historial
+                    </button>
+                </fieldset>
+            </form>
+
+            <!-- Incapacidades y Ausencias -->
+            <form id="incapacidades-ausencias-form" class="tab-content-desempeno" data-tab="incapacidades-ausencias">
+                <h3>Incapacidades y Ausencias Justificadas</h3>
+                <fieldset class="form-fieldset-desempeno">
+                    <div class="form-group">
+                        <label for="motivo_incapacidad">Motivo</label>
+                        <input type="text" id="motivo_incapacidad" name="motivo">
+                    </div>
+                    <div class="form-group">
+                        <label for="fechas_incapacidad">Fechas</label>
+                        <input type="text" id="fechas_incapacidad" name="fechas">
+                    </div>
+                    <div class="form-group">
+                        <label for="documentos_incapacidad">Documentos (PDF)</label>
+                        <div class="file-input-wrapper">
+                            <input type="file" id="documentos_incapacidad" name="documentos" accept=".pdf">
+                            <button type="button" class="file-input-btn">
+                                <i class="fas fa-upload"></i>
+                                <span>Seleccionar archivo</span>
+                            </button>
+                            <span class="file-name"></span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="trayectoria_institucional">Trayectoria Institucional</label>
+                        <textarea id="trayectoria_institucional" name="trayectoria_institucional" rows="4"></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-save">
+                        <i class="fas fa-save"></i>
+                        Guardar Incapacidad
+                    </button>
+                </fieldset>
+            </form>
+
+            <!-- Estímulos y Sanciones -->
+            <form id="estimulos-sanciones-form" class="tab-content-desempeno" data-tab="estimulos-sanciones">
+                <h3>Estímulos y Sanciones</h3>
+                <fieldset class="form-fieldset-desempeno">
+                    <div class="form-group">
+                        <label for="tipo_estimulo">Tipo</label>
+                        <select id="tipo_estimulo" name="tipo">
+                            <option value="Estímulo">Estímulo</option>
+                            <option value="Sanción">Sanción</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="fundamento">Fundamento</label>
+                        <input type="text" id="fundamento" name="fundamento">
+                    </div>
+                    <div class="form-group">
+                        <label for="descripcion_estimulo">Descripción</label>
+                        <textarea id="descripcion_estimulo" name="descripcion"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="fecha_estimulo">Fecha</label>
+                        <input type="date" id="fecha_estimulo" name="fecha">
+                    </div>
+                    <div class="form-group">
+                        <label for="documento_estimulo">Documento (PDF)</label>
+                        <div class="file-input-wrapper">
+                            <input type="file" id="documento_estimulo" name="documento" accept=".pdf">
+                            <button type="button" class="file-input-btn">
+                                <i class="fas fa-upload"></i>
+                                <span>Seleccionar archivo</span>
+                            </button>
+                            <span class="file-name"></span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="motivo_estimulo">Motivo</label>
+                        <input type="text" id="motivo_estimulo" name="motivo">
+                    </div>
+                    <div class="form-group">
+                        <label for="resultado">Resultado</label>
+                        <input type="text" id="resultado" name="resultado">
+                    </div>
+                    <div class="form-group">
+                        <label for="cumplimiento">Cumplimiento</label>
+                        <input type="text" id="cumplimiento" name="cumplimiento">
+                    </div>
+                    <button type="submit" class="btn btn-save">
+                        <i class="fas fa-save"></i>
+                        Guardar Estímulo/Sanción
+                    </button>
+                </fieldset>
+            </form>
+
+            <!-- Separación del Servicio -->
+            <form id="separacion-servicio-form" class="tab-content-desempeno" data-tab="separacion-servicio">
+                <h3>Separación del Servicio</h3>
+                <fieldset class="form-fieldset-desempeno">
+                    <div class="form-group">
+                        <label for="motivo_separacion">Motivo</label>
+                        <input type="text" id="motivo_separacion" name="motivo">
+                    </div>
+                    <div class="form-group">
+                        <label for="fecha_baja">Fecha de Baja</label>
+                        <input type="date" id="fecha_baja" name="fecha_baja">
+                    </div>
+                    <div class="form-group">
+                        <label for="documentos_separacion">Documentos (PDF)</label>
+                        <div class="file-input-wrapper">
+                            <input type="file" id="documentos_separacion" name="documentos" accept=".pdf">
+                            <button type="button" class="file-input-btn">
+                                <i class="fas fa-upload"></i>
+                                <span>Seleccionar archivo</span>
+                            </button>
+                            <span class="file-name"></span>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-save">
+                        <i class="fas fa-save"></i>
+                        Guardar Separación
+                    </button>
+                </fieldset>
+            </form>
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="js/evaluacion-desempeno.js"></script>
+    <script src="js/form-enhancements.js"></script>
+</body>
+</html>

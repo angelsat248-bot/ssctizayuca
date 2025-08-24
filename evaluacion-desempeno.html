@@ -1,0 +1,389 @@
+<div class="form-container desempeno-container">
+    <div class="search-section">
+        <div class="search-container">
+            <i class="fas fa-search search-icon"></i>
+            <input type="text" id="search-personal-desempeno" placeholder="Buscar por nombre o CURP..." class="search-input">
+        </div>
+        <div id="search-results-desempeno" class="search-results"></div>
+    </div>
+
+    <div id="selected-personal-desempeno" class="selected-personal-card"></div>
+
+    <div class="tabs-container">
+        <div class="tabs-desempeno">
+            <!-- Botón con diseño moderno (HTML + CSS embebido) -->
+<button class="tab-link-desempeno active" data-tab="historial-laboral" type="button" aria-pressed="true" title="Abrir historial laboral">
+    <i class="fas fa-briefcase" aria-hidden="true"></i>
+    <span>Historial Laboral</span>
+  </button>
+  
+  <style>
+  /* Estilos modernos para el botón */
+  .tab-link-desempeno{
+    /* Paleta editable */
+    --accent: #2563eb;   /* azul */
+    --accent2:#7c3aed;   /* morado */
+    --fg:     #111827;   /* texto claro */
+    --bg:     #ffffff;   /* fondo */
+  
+    display:inline-flex;
+    align-items:center;
+    gap:.6rem;
+    padding:.65rem 1rem;
+    font:600 0.95rem/1.1 system-ui, -apple-system, Segoe UI, Roboto, Inter, Arial, sans-serif;
+    color:var(--fg);
+    border-radius:14px;
+    border:1.5px solid transparent;
+    background:
+      linear-gradient(var(--bg), var(--bg)) padding-box,
+      linear-gradient(135deg, var(--accent), var(--accent2)) border-box;
+    box-shadow:0 6px 20px rgba(0,0,0,.08);
+    cursor:pointer;
+    transition:transform .15s ease, box-shadow .2s ease, background-color .2s ease, color .2s ease;
+  }
+  
+  .tab-link-desempeno i{ font-size:1rem; line-height:1; }
+  .tab-link-desempeno span{ letter-spacing:.2px; white-space:nowrap; }
+  
+  .tab-link-desempeno:hover{
+    transform:translateY(-2px);
+    box-shadow:0 10px 24px rgba(37,99,235,.15);
+  }
+  
+  .tab-link-desempeno:active{
+    transform:translateY(0);
+    box-shadow:0 4px 12px rgba(0,0,0,.12);
+  }
+  
+  .tab-link-desempeno:focus-visible{
+    outline:none;
+    box-shadow:0 0 0 4px rgba(37,99,235,.2), 0 6px 20px rgba(0,0,0,.08);
+  }
+  
+  /* Estado activo (pestaña seleccionada) */
+  .tab-link-desempeno.active{
+    background:
+      linear-gradient(135deg, rgba(37,99,235,.08), rgba(124,58,237,.10)) padding-box,
+      linear-gradient(135deg, var(--accent), var(--accent2)) border-box;
+  }
+  
+  /* Deshabilitado */
+  .tab-link-desempeno[disabled]{
+    opacity:.6; cursor:not-allowed; transform:none; box-shadow:none;
+  }
+  
+  /* Modo oscuro automático */
+  @media (prefers-color-scheme: dark){
+    .tab-link-desempeno{
+      --bg:#0b1220; --fg:#e5e7eb;
+      background:
+        linear-gradient(var(--bg), var(--bg)) padding-box,
+        linear-gradient(135deg, var(--accent), var(--accent2)) border-box;
+      box-shadow:0 10px 28px rgba(0,0,0,.45);
+    }
+    .tab-link-desempeno.active{
+      background:
+        linear-gradient(135deg, rgba(37,99,235,.18), rgba(124,58,237,.18)) padding-box,
+        linear-gradient(135deg, var(--accent), var(--accent2)) border-box;
+    }
+  }
+  </style>
+
+            <button class="tab-link-desempeno" data-tab="incapacidades-ausencias">
+                <i class="fas fa-procedures"></i>
+                <span>Incapacidades y Ausencias</span>
+            </button>
+            <button class="tab-link-desempeno" data-tab="estimulos-sanciones">
+                <i class="fas fa-award"></i>
+                <span>Estímulos y Sanciones</span>
+            </button>
+            <button class="tab-link-desempeno" data-tab="separacion-servicio">
+                <i class="fas fa-sign-out-alt"></i>
+                <span>Separación del Servicio</span>
+            </button>
+        </div>
+    </div>
+
+    <div id="forms-container-desempeno">
+        <!-- Historial Laboral -->
+        <form id="historial-laboral-form" class="tab-content-desempeno active" data-tab="historial-laboral">
+            <h3 style="color:#0B1985;">Historial Laboral</h3>
+
+            <div class="form-group">
+                <label for="cup">CUP (Clave Única Policial)</label>
+                <input type="text" id="cup" name="cup" maxlength="16" required>
+            </div>
+            <div class="form-group">
+                <label for="cup_vigencia">Vigencia del CUP</label>
+                <input type="date" id="cup_vigencia" name="cup_vigencia" required>
+            </div>
+            <fieldset id="historial-laboral-fieldset">
+                <div class="form-group">
+                    <label for="funcion"style="color: #0F0CC2;">Función</label>
+                    <input type="text" id="funcion" name="funcion">
+                </div>
+                <div class="form-group">
+                    <label for="direccion"style="color: #C20C27;">Dirección</label>
+                    <input type="text" id="direccion" name="direccion">
+                </div>
+                <div class="form-group">
+                    <label for="periodo"style="color: #0F0CC2;">Periodo</label>
+                    <input type="text" id="periodo" name="periodo">
+                </div>
+                <div class="form-group">
+                    <label for="documento_comprobatorio"style="color: #C20C27;">Documento Comprobatorio (PDF)</label>
+                    <div class="file-input-wrapper">
+                        <input type="file" id="documento_comprobatorio" name="documento_comprobatorio" accept=".pdf">
+                          
+                        <!--<button type="button" class="file-input-btn">
+                            <i class="fas fa-upload"></i>
+                            <span>Seleccionar archivo</span>
+                        </button>-->
+                        <button type="button" class="file-input-btn" style="
+    background-color: #040463; /* Color de fondo verde */
+    color: white;              /* Color del texto blanco */
+    padding: 10px 20px;        /* Espaciado interno */
+    border: none;              /* Sin borde */
+    border-radius: 5px;        /* Bordes redondeados */
+    font-size: 16px;           /* Tamaño del texto */
+    cursor: pointer;           /* Cursor en forma de mano al pasar el mouse */
+    display: flex;             /* Alineación de ícono y texto */
+    align-items: center;
+    gap: 8px;                  /* Espacio entre ícono y texto */
+">
+    <i class="fas fa-upload"></i>
+    <span>Subida de archivos</span>
+</button>
+
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="checkbox-container">
+                        <input type="checkbox" name="portacion_armas_fuego">
+                        <span class="checkmark"></span>
+                        Portación de Armas de Fuego
+                    </label>
+                </div>
+           <!-- Botón con paleta solicitada (#2563eb, #7c3aed, #111827, #ffffff) -->
+<button type="submit" class="btn btn-save">
+    <i class="fas fa-save" aria-hidden="true"></i>
+    Guardar Historial
+  </button>
+  
+  <style>
+    .btn.btn-save{
+      /* Paleta */
+      --accent:  #2563eb;  /* azul */
+      --accent2: #7c3aed;  /* morado */
+      --fg:      #111827;  /* texto */
+      --bg:      #ffffff;  /* fondo */
+  
+      display: inline-flex;
+      align-items: center;
+      gap: .55rem;
+      padding: .65rem 1rem;
+      font-weight: 600;
+      color: var(--fg);
+      border-radius: 12px;
+      border: 1.5px solid transparent;
+  
+      /* Fondo y borde con la combinación de colores */
+      background:
+        linear-gradient(var(--bg), var(--bg)) padding-box,
+        linear-gradient(135deg, var(--accent), var(--accent2)) border-box;
+  
+      box-shadow: 0 6px 18px rgba(37, 99, 235, .15);
+      cursor: pointer;
+      transition: transform .15s ease, box-shadow .2s ease, background-color .2s ease, color .2s ease;
+    }
+  
+    .btn.btn-save i{
+      font-size: 1rem;
+      line-height: 1;
+    }
+  
+    .btn.btn-save:hover{
+      transform: translateY(-2px);
+      box-shadow: 0 10px 24px rgba(124, 58, 237, .18);
+      /* leve tinte al fondo en hover */
+      background:
+        linear-gradient(135deg, rgba(37,99,235,.06), rgba(124,58,237,.08)) padding-box,
+        linear-gradient(135deg, var(--accent), var(--accent2)) border-box;
+    }
+  
+    .btn.btn-save:active{
+      transform: translateY(0);
+      box-shadow: 0 4px 12px rgba(0,0,0,.12);
+    }
+  
+    .btn.btn-save:focus-visible{
+      outline: none;
+      box-shadow: 0 0 0 4px rgba(37,99,235,.25), 0 6px 18px rgba(0,0,0,.08);
+    }
+  </style>
+  
+            </fieldset>
+        </form>
+
+        <!-- Incapacidades y Ausencias -->
+        <form id="incapacidades-ausencias-form" class="tab-content-desempeno" data-tab="incapacidades-ausencias">
+            <h3 style="color:#0B1985;">Incapacidades y Ausencias Justificadas</h3>
+        
+            <fieldset class="form-fieldset-desempeno">
+                <div class="form-group">
+                    <label for="motivo_incapacidad" style="color: #0F0CC2;">Motivo</label>
+                    <input type="text" id="motivo_incapacidad" name="motivo">
+                </div>
+                <div class="form-group">
+                    <label for="fechas_incapacidad"style="color: #0F0CC2;">Fechas</label>
+                    <input type="text" id="fechas_incapacidad" name="fechas">
+                </div>
+                <div class="form-group">
+                    <label for="documentos_incapacidad"style="color: #0F0CC2;">Documentos (PDF)</label>
+                    <div class="file-input-wrapper">
+                        <input type="file" id="documentos_incapacidad" name="documentos" accept=".pdf">
+                        <!--<button type="button" class="file-input-btn">
+                            <i class="fas fa-upload"></i>
+                            <span>Seleccionar archivo</span>
+                        </button>-->
+                        <button type="button" class="file-input-btn" style="
+    background-color: #040463; /* Color de fondo verde */
+    color: white;              /* Color del texto blanco */
+    padding: 10px 20px;        /* Espaciado interno */
+    border: none;              /* Sin borde */
+    border-radius: 5px;        /* Bordes redondeados */
+    font-size: 16px;           /* Tamaño del texto */
+    cursor: pointer;           /* Cursor en forma de mano al pasar el mouse */
+    display: flex;             /* Alineación de ícono y texto */
+    align-items: center;
+    gap: 8px;                  /* Espacio entre ícono y texto */">
+    <i class="fas fa-upload"></i>
+    <span>Subida de archivos</span>
+</button>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="trayectoria_institucional"style="color: #0F0CC2;">Trayectoria Institucional</label>
+                    <textarea id="trayectoria_institucional" name="trayectoria_institucional" rows="4"></textarea>
+                </div>
+                <button type="submit" class="btn btn-save">
+                    <i class="fas fa-save"></i>
+                    Guardar Incapacidad
+                </button>
+            </fieldset>
+        </form>
+
+        <!-- Estímulos y Sanciones -->
+        <form id="estimulos-sanciones-form" class="tab-content-desempeno" data-tab="estimulos-sanciones">
+            <h3 style="color:#0B1985;">Estímulos y Sanciones</h3>
+            <fieldset class="form-fieldset-desempeno">
+                <div class="form-group">
+                    <label for="tipo_estimulo"style="color: #0F0CC2;">Tipo</label>
+                    <select id="tipo_estimulo" name="tipo">
+                        <option value="Estímulo">Estímulo</option>
+                        <option value="Sanción">Sanción</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="fundamento"style="color: #0F0CC2;">Fundamento</label>
+                    <input type="text" id="fundamento" name="fundamento">
+                </div>
+                <div class="form-group">
+                    <label for="descripcion_estimulo"style="color: #0F0CC2;">Descripción</label>
+                    <textarea id="descripcion_estimulo" name="descripcion"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="fecha_estimulo"style="color: #0F0CC2;">Fecha</label>
+                    <input type="date" id="fecha_estimulo" name="fecha">
+                </div>
+                <div class="form-group">
+                    <label for="documento_estimulo"style="color: #0F0CC2;">Documento (PDF)</label>
+                    <div class="file-input-wrapper">
+                        <input type="file" id="documento_estimulo" name="documento" accept=".pdf">
+                        <!--<button type="button" class="file-input-btn">
+                            <i class="fas fa-upload"></i>
+                            <span>Seleccionar archivo</span>
+                        </button>-->
+                        <button type="button" class="file-input-btn" style="
+    background-color: #040463; /* Color de fondo verde */
+    color: white;              /* Color del texto blanco */
+    padding: 10px 20px;        /* Espaciado interno */
+    border: none;              /* Sin borde */
+    border-radius: 5px;        /* Bordes redondeados */
+    font-size: 16px;           /* Tamaño del texto */
+    cursor: pointer;           /* Cursor en forma de mano al pasar el mouse */
+    display: flex;             /* Alineación de ícono y texto */
+    align-items: center;
+    gap: 8px;                  /* Espacio entre ícono y texto */">
+    <i class="fas fa-upload"></i>
+    <span>Subida de archivos</span>
+</button>
+
+
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="motivo_estimulo"style="color: #0F0CC2;">Motivo</label>
+                    <input type="text" id="motivo_estimulo" name="motivo">
+                </div>
+                <div class="form-group">
+                    <label for="resultado"style="color: #0F0CC2;">Resultado</label>
+                    <input type="text" id="resultado" name="resultado">
+                </div>
+                <div class="form-group">
+                    <label for="cumplimiento"style="color: #0F0CC2;">Cumplimiento</label>
+                    <input type="text" id="cumplimiento" name="cumplimiento">
+                </div>
+                <button type="submit" class="btn btn-save">
+                    <i class="fas fa-save"></i>
+                    Guardar Estímulo/Sanción
+                </button>
+            </fieldset>
+        </form>
+
+        <!-- Separación del Servicio -->
+        <form id="separacion-servicio-form" class="tab-content-desempeno" data-tab="separacion-servicio">
+            <h3 style="color:#0B1985;">Separación del Servicio</h3>
+            <fieldset class="form-fieldset-desempeno">
+                <div class="form-group">
+                    <label for="motivo_separacion"style="color: #0F0CC2;">Motivo</label>
+                    <input type="text" id="motivo_separacion" name="motivo">
+                </div>
+                <div class="form-group">
+                    <label for="fecha_baja"style="color: #0F0CC2;">Fecha de Baja</label>
+                    <input type="date" id="fecha_baja" name="fecha_baja">
+                </div>
+                <div class="form-group">
+                    <label for="documentos_separacion"style="color: #0F0CC2;">Documentos (PDF)</label>
+                    <div class="file-input-wrapper">
+                        <input type="file" id="documentos_separacion" name="documentos" accept=".pdf">
+                        <!--<button type="button" class="file-input-btn">
+                            <i class="fas fa-upload"></i>
+                            <span>Seleccionar archivo</span>
+                        </button>-->
+                        <button type="button" class="file-input-btn" style="
+    background-color: #040463; /* Color de fondo verde */
+    color: white;              /* Color del texto blanco */
+    padding: 10px 20px;        /* Espaciado interno */
+    border: none;              /* Sin borde */
+    border-radius: 5px;        /* Bordes redondeados */
+    font-size: 16px;           /* Tamaño del texto */
+    cursor: pointer;           /* Cursor en forma de mano al pasar el mouse */
+    display: flex;             /* Alineación de ícono y texto */
+    align-items: center;
+    gap: 8px;                  /* Espacio entre ícono y texto */">
+    <i class="fas fa-upload"></i>
+    <span>Subida de archivos</span>
+</button>
+
+
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-save">
+                    <i class="fas fa-save"></i>
+                    Guardar Separación
+                </button>
+            </fieldset>
+        </form>
+    </div>
+</div>

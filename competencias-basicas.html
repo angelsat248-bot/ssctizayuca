@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+    <html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Competencias Básicas - SSCTIZAYUCA</title>
+        <link rel="stylesheet" href="/css/styles.css">
+        <link rel="stylesheet" href="/css/competencias-basicas.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    </head>
+    <body>
+        <div class="container">
+            <div class="form-container">
+                <h2><i class="fas fa-clipboard-check"></i> Competencias Básicas</h2>
+                <h2><i class="fas fa-clipboard-check"></i> para el registro de la constancia no debera de pasar mas de 3 años</h2>
+                
+                <!-- Buscador de Personal -->
+                <div class="search-section">
+                    <div class="search-box">
+                        <input type="text" id="searchInput" placeholder="Buscar por nombre...">
+                        <button id="searchBtn"><i class="fas fa-search"></i> Buscar</button>
+                    </div>
+                    <div id="searchResults" class="search-results"></div>
+                </div>
+    
+                <!-- Información del Personal -->
+                <div id="personalInfo" class="personal-info" style="display: none;">
+                    <h3>Datos del Personal</h3>
+                    <div class="info-grid">
+                        <div class="info-item">
+                            <span class="info-label">Nombre:</span>
+                            <span id="infoNombre" class="info-value"></span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">Puesto:</span>
+                            <span id="infoPuesto" class="info-value">-</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">CUIP:</span>
+                            <span id="infoCuip" class="info-value"></span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">CURP:</span>
+                            <span id="infoCurp" class="info-value"></span>
+                        </div>
+                    </div>
+                    <input type="hidden" id="personalId">
+                </div>
+    
+                <!-- Formulario de Competencias Básicas -->
+                <form id="competenciasForm" class="evaluation-form">
+                    <div class="form-group">
+                        <label for="fechaVigencia">Fecha de Expedición de Constancia:</label>
+                        <input type="date" id="fechaVigencia" name="fechaVigencia" required>
+                        <small class="error-message" id="vigenciaError"></small>
+                    </div>
+    
+                    <div class="form-group">
+                        <label for="resultado">Resultado:</label>
+                        <select id="resultado" name="resultado" required disabled>
+                            <option value="">Seleccione un resultado</option>
+                            <option value="Aprobado">Aprobado</option>
+                            <option value="No Aprobado">No Aprobado</option>
+                            <option value="En Proceso">En Proceso</option>
+                        </select>
+                    </div>
+    
+                    <div class="form-group">
+                        <label for="institucion">Institución:</label>
+                        <input type="text" id="institucion" name="institucion" required disabled>
+                    </div>
+    
+                    <div class="form-group">
+                        <label for="enlaces">Enlaces a constancias digitales:</label>
+                        <input type="url" id="enlaces" name="enlaces" placeholder="https://ejemplo.com/constancia" disabled>
+                    </div>
+    
+                    <div class="form-group">
+                        <label for="observaciones">Observaciones:</label>
+                        <textarea id="observaciones" name="observaciones" rows="3" disabled></textarea>
+                    </div>
+    
+                    <div class="form-group">
+                        <label for="archivo_pdf">Documento PDF (opcional):</label>
+                        <div class="file-upload">
+                            <input type="file" id="archivo_pdf" name="archivo_pdf" accept=".pdf" disabled>
+                            <label for="archivo_pdf" class="file-label">
+                                <i class="fas fa-upload"></i> Seleccionar archivo
+                                <span id="fileName">Ningún archivo seleccionado</span>
+                            </label>
+                        </div>
+                    </div>
+    
+                    <div class="form-actions">
+                        <button type="button" id="cancelBtn" class="btn btn-secondary">Cancelar</button>
+                        <button type="submit" id="saveBtn" class="btn btn-primary" disabled>Guardar</button>
+                    </div>
+                </form>
+            </div>
+    
+            <!-- Tabla de registros -->
+            <div class="records-section">
+                <h3>Registros de Competencias Básicas</h3>
+                <div class="table-responsive">
+                    <table id="competenciasTable">
+                        <thead>
+                            <tr>
+                                <th>Nombre</th>
+                                <th>Vigencia (años)</th>
+                                <th>Resultado</th>
+                                <th>Fecha</th>
+                                <th>Institución</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody id="competenciasBody">
+                            <!-- Los registros se cargarán aquí dinámicamente -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    
+        <!-- Modal para ver detalles -->
+        <div id="viewModal" class="modal">
+            <div class="modal-content">
+                <span class="close-modal">&times;</span>
+                <h3>Detalles de Competencias Básicas</h3>
+                <div id="modalContent"></div>
+            </div>
+        </div>
+    
+        <script src="/js/competencias-basicas.js" type="module"></script>
+    </body>
+    </html>
