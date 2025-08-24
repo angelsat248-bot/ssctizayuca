@@ -2,16 +2,15 @@ services:
   - type: web
     name: ssctizayuca
     env: node
-    root: backend  # Indica que la aplicación está en la carpeta backend
-    buildCommand: npm install
-    startCommand: node server.js
+    buildCommand: cd backend && npm install
+    startCommand: cd backend && node server.js
     envVars:
       - key: NODE_ENV
         value: production
       - key: PORT
         value: 10000
       - key: NPM_CONFIG_PRODUCTION
-        value: "false"  # Asegura que se instalen dependencias de desarrollo
+        value: "false"
       - key: DATABASE_URL
         fromDatabase:
           name: ssctizayuca-db
