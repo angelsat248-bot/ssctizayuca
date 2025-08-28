@@ -63,7 +63,7 @@ function displaySearchResults(results) {
     
     const rows = results.map(person => {
         // Asegurarse de que la ruta de la imagen sea correcta
-        let imagePath = 'img/logo1.jpg';
+        let imagePath = 'img/LOGOSCC.png';
         if (person.foto_perfil) {
             // Eliminar cualquier doble barra o prefijo de ruta que pueda causar problemas
             const cleanPath = person.foto_perfil.replace(/^\/+|\/+$/g, '');

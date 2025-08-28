@@ -822,7 +822,7 @@ async function generatePDF() {
         
         // Add logo
         const logo = new Image();
-        logo.src = 'img/logo1.jpg';
+        logo.src = 'img/LOGOSCC.png';
         
         // Wait for logo to load
         await new Promise((resolve) => {

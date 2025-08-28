@@ -170,9 +170,9 @@ function displaySearchResults(results) {
             <td>
                 <img src="${persona.foto_perfil ? 
                     `${API_BASE_URL}/uploads/fotos/${persona.foto_perfil.split('/').pop()}` : 
-                    'img/logo1.jpg'}" 
+                    'img/LOGOSCC.png'}" 
                      alt="Foto" class="employee-photo" 
-                     onerror="this.onerror=null; this.src='img/logo1.jpg';">
+                     onerror="this.onerror=null; this.src='img/LOGOSCC.png';">
             </td>
             <td>${persona.nombres || ''}</td>
             <td>${[persona.apellido_paterno, persona.apellido_materno].filter(Boolean).join(' ')}</td>
