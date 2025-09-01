@@ -80,7 +80,7 @@ function displaySearchResults(results) {
             <td>
                 <img src="${imagePath}" 
                      alt="Foto" class="employee-photo" 
-                     onerror="this.onerror=null; this.src='img/logo1.jpg';">
+                     onerror="this.onerror=null; this.src='img/LOGOSCC.png';">
             </td>
             <td>${person.nombres || ''}</td>
             <td>${[person.apellido_paterno, person.apellido_materno].filter(Boolean).join(' ')}</td>
