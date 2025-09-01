@@ -11,7 +11,7 @@
     <div class="dashboard">
         <header class="header">
             <div class="logo">
-                <img src="img/LOGOSCC.png" alt="Escudo Policial" class="logo-img">
+                <img src="img/logo1.jpg" alt="Escudo Policial" class="logo-img">
                 <h1>SSCTIZAYUCA</h1>
             </div>
             <nav class="user-menu">
@@ -19,6 +19,61 @@
                 <button class="logout-btn"><i class="fas fa-sign-out-alt"></i> Cerrar Sesión</button>
             </nav>
         </header>
+        <script>
+            // Check user role and show/hide sections accordingly
+            document.addEventListener('DOMContentLoaded', function() {
+                const userRole = sessionStorage.getItem('userRole');
+                const navItems = document.querySelectorAll('.main-nav li');
+                const tabContents = document.querySelectorAll('.tab-content');
+                
+                // If no role is found, redirect to login
+                if (!userRole) {
+                    window.location.href = 'login.html';
+                    return;
+                }
+
+                // Define accessible tabs for each role
+                const accessibleTabs = {
+                    'admin': [
+                        'datos-generales',
+                        'evaluaciones-control',
+                        'formacion-inicial',
+                        'competencias-basicas',
+                        'evaluacion-desempeno',
+                        'reportes',
+                        'perfil-policia'
+                    ],
+                    'capturista': [
+                        'datos-generales',
+                        'evaluaciones-control'
+                    ]
+                };
+
+                // Hide all tabs first
+                navItems.forEach(item => {
+                    const tabId = item.getAttribute('data-tab');
+                    if (!accessibleTabs[userRole].includes(tabId)) {
+                        item.style.display = 'none';
+                    }
+                });
+
+                // Show only accessible content
+                tabContents.forEach(content => {
+                    const contentId = content.id;
+                    if (!accessibleTabs[userRole].includes(contentId)) {
+                        content.style.display = 'none';
+                    }
+                });
+
+                // Set first visible tab as active
+                const firstVisibleTab = document.querySelector('.main-nav li[style="display: none;"]');
+                if (firstVisibleTab) {
+                    firstVisibleTab.click();
+                } else if (navItems.length > 0) {
+                    navItems[0].click();
+                }
+            });
+        </script>
         
         <div class="container">
             <aside class="sidebar">
@@ -158,7 +213,7 @@
                             
                             <div class="photo-upload">
                                 <div class="photo-preview">
-                                    <img id="fotoPreview" src="img/LOGOSCC.png" alt="Foto de perfil">
+                                    <img id="fotoPreview" src="img/logo1.jpg" alt="Foto de perfil">
                                 </div>
                                 <div class="upload-btn-wrapper">
                                     <button type="button" class="btn-upload">Seleccionar Foto</button>

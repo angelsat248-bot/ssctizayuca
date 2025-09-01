@@ -154,6 +154,20 @@ const upload = multer({
     }
 });
 
+// Authentication middleware
+const requireAuth = (req, res, next) => {
+    const userRole = req.session.userRole;
+    if (!userRole) {
+        return res.redirect('/login.html');
+    }
+    next();
+};
+
+// Set login as default route
+app.get('/', (req, res) => {
+    res.redirect('/login.html');
+});
+
 // Routes
 app.use('/api/personal', personalRoutes);
 app.use('/api/incapacidades-ausencias', incapacidadesAusenciasRoutes);
