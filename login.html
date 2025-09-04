@@ -346,7 +346,7 @@
             letter-spacing: 0.5px;
         }
 
-        /* Fondo de partículas flotantes */
+        /* esto es el Fondo de partículas flotantes */
         .particles {
             position: fixed;
             top: 0;
@@ -412,12 +412,12 @@
     </style>
 </head>
 <body>
-    <!-- Floating particles background -->
+    <!-- Fondo de partículas flotantes -->
     <div class="particles" id="particles"></div>
     
     <div class="login-container">
         <div class="login-header">
-            <img src="img/LOGOSCC.png" alt="SSCTizayuca Logo">
+            <img src="img/logo1.jpg" alt="SSCTizayuca Logo">
             <h1>Iniciar Sesión</h1>
             <p>Ingresa tus credenciales para continuar</p>
         </div>
@@ -452,7 +452,7 @@
     </div>
 
     <script>
-        // Create floating particles
+        // Crea partículas flotantes
         function createParticles() {
             const particlesContainer = document.getElementById('particles');
             const particleCount = 20;
@@ -461,23 +461,23 @@
                 const particle = document.createElement('div');
                 particle.className = 'particle';
                 
-                // Random size between 2px and 6px
+                // Tamaño aleatorio entre 2px y 6px
                 const size = Math.random() * 4 + 2;
                 particle.style.width = `${size}px`;
                 particle.style.height = `${size}px`;
                 
-                // Random position
+                // Posición aleatoria
                 particle.style.left = `${Math.random() * 100}%`;
                 particle.style.top = `${Math.random() * 100}%`;
                 
-                // Random animation duration between 10s and 25s
+                // Duración de animación aleatoria entre 10 y 25 segundos
                 const duration = Math.random() * 15 + 10;
                 particle.style.animationDuration = `${duration}s`;
                 
-                // Random delay
+                // Retraso aleatorio
                 particle.style.animationDelay = `-${Math.random() * 20}s`;
                 
-                // Random opacity
+                // Opacidad aleatoria
                 particle.style.opacity = Math.random() * 0.5 + 0.1;
                 
                 particlesContainer.appendChild(particle);
@@ -485,16 +485,16 @@
         }
 
         document.addEventListener('DOMContentLoaded', function() {
-            // Create particles
+            // Crear partículas
             createParticles();
             
             const userOptions = document.querySelectorAll('.user-option');
             const loginForm = document.getElementById('loginForm');
             const errorMessage = document.getElementById('errorMessage');
             const inputs = document.querySelectorAll('input');
-            let userRole = 'admin'; // Default role
+            let userRole = 'admin'; // rol predeterminado
 
-            // Add focus effect to inputs
+            // Añadir efecto de enfoque a las entradas
             inputs.forEach(input => {
                 input.addEventListener('focus', function() {
                     this.parentElement.classList.add('focused');
@@ -505,27 +505,27 @@
                 });
             });
 
-            // Handle user role selection with smooth transition
+            // Gestionar la selección de roles de usuario con una transición fluida
             userOptions.forEach(option => {
                 option.addEventListener('click', function() {
-                    // Remove active class from all options
+                    // eliminar la clase activa de todas las opciones
                     userOptions.forEach(opt => {
                         opt.classList.remove('active');
                         opt.style.transform = '';
                     });
                     
-                    // Add active class to clicked option
+                    // Agregar clase activa a la opción seleccionada
                     this.classList.add('active');
                     this.style.transform = 'translateY(-2px)';
                     
-                    // Update user role
+                    // Actualizar rol de usuario
                     userRole = this.getAttribute('data-role');
                     
-                    // Set default credentials based on role with animation
+                    // Establecer credenciales predeterminadas según el rol con animación
                     const usernameInput = document.getElementById('username');
                     const passwordInput = document.getElementById('password');
                     
-                    // Animate input fields
+                    // Animar campos de entrada
                     usernameInput.style.transform = 'translateY(-5px)';
                     passwordInput.style.transform = 'translateY(-5px)';
                     setTimeout(() => {
@@ -533,77 +533,76 @@
                         passwordInput.style.transform = '';
                     }, 200);
                     
-                    if (userRole === 'admin') {
-                        usernameInput.value = 'admin';
-                        passwordInput.value = 'admin123';
-                    } else {
-                        usernameInput.value = 'ssc';
-                        passwordInput.value = 'ssc123';
-                    }
+                    // Borre ambos campos al cambiar de roles
+                    document.getElementById('username').value = '';
+                    document.getElementById('password').value = '';
                 });
             });
 
-            // Set default credentials for admin on page load
-            document.getElementById('username').value = 'admin';
-            document.getElementById('password').value = 'admin123';
+            // Borrar cualquier valor existente al cargar la página
+            document.getElementById('username').value = '';
+            document.getElementById('password').value = '';
 
-            // Handle form submission with enhanced animations
+           
+             // Gestionar el envío de formularios con animaciones mejoradas
             loginForm.addEventListener('submit', async function(e) {
                 e.preventDefault();
                 const username = document.getElementById('username').value;
                 const password = document.getElementById('password').value;
                 const loginBtn = document.querySelector('.btn-login');
                 
-                // Disable button and show loading state
+                
+// Deshabilitar el botón y mostrar el estado de carga
                 loginBtn.disabled = true;
                 loginBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Verificando...';
                 
-                // Simulate API call delay
+                
+// Simular el retraso de la llamada API
                 await new Promise(resolve => setTimeout(resolve, 1000));
                 
                 // Validate credentials
                 if ((userRole === 'admin' && username === 'admin' && password === 'admin123') ||
                     (userRole === 'capturista' && username === 'ssc' && password === 'ssc123')) {
                     
-                    // Success animation
+                    // Animación de éxito
                     loginBtn.innerHTML = '<i class="fas fa-check"></i> ¡Bienvenido!';
                     loginBtn.style.background = 'linear-gradient(45deg, #4bb543, #2e7d32)';
                     
-                    // Store user role in sessionStorage
+                    // Almacenar el rol del usuario en sessionStorage
                     sessionStorage.setItem('userRole', userRole);
                     
-                    // Add success class for animation
+                    // Agregar clase de éxito para la animación
                     document.querySelector('.login-container').classList.add('success');
                     
-                    // Redirect after animation
+                    // Redirigir después de la animación
                     setTimeout(() => {
                         window.location.href = 'index.html';
                     }, 800);
                     
                 } else {
-                    // Error state
+                   // estado de error
                     loginBtn.innerHTML = '<i class="fas fa-times"></i> Error';
                     loginBtn.style.background = 'linear-gradient(45deg, #ff5252, #d32f2f)';
                     
-                    // Show error with animation
+                    // Mostrar error con animación
                     errorMessage.style.display = 'block';
                     setTimeout(() => {
                         errorMessage.style.opacity = '1';
                     }, 10);
                     
-                    // Shake animation on error
+                    // Animación de agitación en caso de error
                     loginForm.classList.add('shake');
                     setTimeout(() => {
                         loginForm.classList.remove('shake');
                     }, 500);
                     
-                    // Reset button after delay
+                    // Botón de reinicio después del retraso
                     setTimeout(() => {
                         loginBtn.innerHTML = 'Iniciar Sesión';
                         loginBtn.style.background = 'linear-gradient(45deg, var(--primary), var(--secondary))';
                         loginBtn.disabled = false;
                         
-                        // Hide error message
+                        // Ocultar mensaje de error
                         errorMessage.style.opacity = '0';
                         setTimeout(() => {
                             errorMessage.style.display = 'none';
