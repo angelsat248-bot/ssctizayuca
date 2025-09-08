@@ -53,6 +53,7 @@
                         'evaluacion-desempeno',
                         'reportes',
                         'perfil-policia'
+                        'estadisticas-policiales'
                     ],
                     'capturista': [
                         'datos-generales',
@@ -97,6 +98,7 @@
                         <li data-tab="evaluacion-desempeno"><i class="fas fa-chart-line"></i> Evaluación de Desempeño</li>
                         <li data-tab="reportes"><i class="fas fa-file-alt"></i> Reportes</li>
                         <li data-tab="perfil-policia"><i class="fas fa-id-card"></i> Perfil</li>
+                        <li data-tab="estadisticas-policiales"><i class="fas fa-chart-bar"></i> Estadisticas policiales</li>
                     </ul>
                 </nav>
             </aside>
@@ -406,6 +408,53 @@
                     <p>Contenido de evaluación de desempeño. Próximamente...</p>
                 </div>
                 
+                <div id="estadisticas-policiales" class="tab-content">
+                    <h2><i class="fas fa-chart-bar"></i> Estadísticas Policiales</h2>
+                    
+                    <!-- Search Form -->
+                    <div class="search-container">
+                        <div class="search-box">
+                            <input type="text" id="buscar-policia" placeholder="Buscar por nombres o CUP...">
+                            <button id="btn-buscar"><i class="fas fa-search"></i> Buscar</button>
+                        </div>
+                        
+                        <div class="filter-buttons">
+                            <button id="btn-vigencia-2025" class="btn btn-warning">
+                                <i class="fas fa-calendar-check"></i> CUP Vencen 2025
+                            </button>
+                            <button id="btn-vigencia-menor-2025" class="btn btn-danger">
+                                <i class="fas fa-calendar-times"></i> CUP Vencidos
+                            </button>
+                            <button id="btn-con-portacion" class="btn btn-success">
+                                <i class="fas fa-check-circle"></i> Con Portación
+                            </button>
+                            <button id="btn-sin-portacion" class="btn btn-danger">
+                                <i class="fas fa-times-circle"></i> Sin Portación
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- Results Table -->
+                    <div class="table-responsive">
+                        <table id="tabla-estadisticas" class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Nombres</th>
+                                    <th>Apellido Paterno</th>
+                                    <th>Apellido Materno</th>
+                                    <th>CUP</th>
+                                    <th>Vigencia CUP</th>
+                                    <th>Función</th>
+                                    <th>Portación de Armas</th>
+                                </tr>
+                            </thead>
+                            <tbody id="cuerpo-tabla">
+                                <!-- Los datos se cargarán dinámicamente -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                
                 <div id="reportes" class="tab-content">
                     <h2><i class="fas fa-file-alt"></i> Reportes</h2>
                     <p>Contenido de reportes. Próximamente...</p>
@@ -415,5 +464,6 @@
     </div>
     
     <script type="module" src="js/main.js"></script>
+    <script type="module" src="js/estadisticas-policiales.js"></script>
 </body>
 </html>
