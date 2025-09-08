@@ -13,7 +13,6 @@ const historialLaboralRoutes = require('./routes/historialLaboral');
 const incapacidadesAusenciasRoutes = require('./routes/incapacidadesAusencias');
 const estimulosSancionesRoutes = require('./routes/estimulosSanciones');
 const separacionServicioRoutes = require('./routes/separacionServicio');
-const estadisticasPolicialesRoutes = require('./routes/estadisticasPoliciales');
 const multer = require('multer');
 require('dotenv').config();
 
@@ -174,38 +173,6 @@ app.use('/api/personal', personalRoutes);
 app.use('/api/incapacidades-ausencias', incapacidadesAusenciasRoutes);
 app.use('/api/estimulos-sanciones', estimulosSancionesRoutes);
 app.use('/api/separacion-servicio', separacionServicioRoutes);
-
-// Hacer públicas las rutas de estadísticas
-app.use('/api/estadisticas', (req, res, next) => {
-    // Si es una petición OPTIONS (preflight), responder con éxito
-    if (req.method === 'OPTIONS') {
-        return res.status(200).end();
-    }
-    next();
-}, estadisticasPolicialesRoutes);
-
-// Ruta para verificar el estado de la autenticación
-app.get('/api/auth/status', (req, res) => {
-    const token = req.headers.authorization?.split(' ')[1];
-    if (!token) {
-        return res.json({ authenticated: false });
-    }
-    
-    try {
-        const decoded = jwt.verify(token, process.env.JWT_SECRET || 'tu_clave_secreta');
-        res.json({ 
-            authenticated: true,
-            user: {
-                id: decoded.id,
-                username: decoded.username,
-                role: decoded.role
-            }
-        });
-    } catch (error) {
-        res.json({ authenticated: false });
-    }
-});
-
 
 // Ruta para subir archivos
 app.post('/api/upload', upload.single('foto'), (req, res) => {
