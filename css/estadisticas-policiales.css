@@ -1,0 +1,162 @@
+/* Estilos para la sección de Estadísticas Policiales */
+#estadisticas-policiales .search-container {
+    background: #f8f9fa;
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+#estadisticas-policiales .search-box {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+#estadisticas-policiales .search-box input[type="text"] {
+    flex: 1;
+    padding: 10px 15px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+#estadisticas-policiales .search-box button {
+    padding: 10px 20px;
+    background-color: #2c3e50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: background-color 0.3s;
+}
+
+#estadisticas-policiales .search-box button:hover {
+    background-color: #1a252f;
+}
+
+#estadisticas-policiales .filter-buttons {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+}
+
+#estadisticas-policiales .btn {
+    padding: 8px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    transition: all 0.3s;
+}
+
+#estadisticas-policiales .btn i {
+    margin-right: 5px;
+}
+
+#estadisticas-policiales .btn-warning {
+    background-color: #ffc107;
+    color: #212529;
+}
+
+#estadisticas-policiales .btn-danger {
+    background-color: #dc3545;
+    color: white;
+}
+
+#estadisticas-policiales .btn-success {
+    background-color: #28a745;
+    color: white;
+}
+
+#estadisticas-policiales .btn:hover {
+    opacity: 0.9;
+    transform: translateY(-1px);
+}
+
+#estadisticas-policiales .table-responsive {
+    overflow-x: auto;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+#estadisticas-policiales .table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+#estadisticas-policiales .table th,
+#estadisticas-policiales .table td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid #dee2e6;
+}
+
+#estadisticas-policiales .table th {
+    background-color: #2c3e50;
+    color: white;
+    font-weight: 600;
+}
+
+#estadisticas-policiales .table tbody tr:hover {
+    background-color: #f8f9fa;
+}
+
+/* Estilos para las filas según su estado */
+#estadisticas-policiales .table tbody tr.vencido-2025 {
+    background-color: #fff3cd;
+}
+
+#estadisticas-policiales .table tbody tr.vencido {
+    background-color: #f8d7da;
+}
+
+#estadisticas-policiales .table tbody tr.con-portacion {
+    background-color: #d4edda;
+}
+
+#estadisticas-policiales .table tbody tr.sin-portacion {
+    background-color: #f8d7da;
+}
+
+/* Estilos para celdas específicas */
+#estadisticas-policiales .vencimiento-2025 {
+    color: #e74c3c;
+    font-weight: bold;
+}
+
+#estadisticas-policiales .portacion-si {
+    color: #28a745;
+    font-weight: bold;
+}
+
+#estadisticas-policiales .portacion-no {
+    color: #dc3545;
+    font-weight: bold;
+}
+
+/* Estilos responsivos */
+@media (max-width: 768px) {
+    #estadisticas-policiales .search-box {
+        flex-direction: column;
+    }
+    
+    #estadisticas-policiales .search-box input[type="text"],
+    #estadisticas-policiales .search-box button {
+        width: 100%;
+    }
+    
+    #estadisticas-policiales .filter-buttons {
+        flex-direction: column;
+    }
+    
+    #estadisticas-policiales .filter-buttons button {
+        width: 100%;
+    }
+}
