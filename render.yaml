@@ -18,7 +18,7 @@ services:
     plan: free
 
 databases:
-  - name: ssctizayuca-db
+  - name: ssctizayuca2-db
     databaseName: lalo  # Nombre de tu base de datos
     user: postgres      # Usuario de la base de datos
     plan: free
